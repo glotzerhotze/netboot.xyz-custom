@@ -19,6 +19,6 @@ set iso_url http://192.168.23.3:8080/ubuntu/ubuntu-23.10-live-server-amd64.iso
 
 kernel ${vmlinuz_url} 
 initrd ${initrd_url}
-imgargs vmlinuz initrd=initrd url=${iso_url} ip=dhcp vga=normal autoinstall ds=nocloud-net;s=${seed_url}
+imgargs vmlinuz initrd=initrd url=${iso_url} ip=dhcp vga=normal autoinstall ds=nocloud-net;s=${seed_url} root=/dev/ram0 ramdisk_size=1500000
 
 boot
