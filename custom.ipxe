@@ -10,8 +10,8 @@ set seed_url http://192.168.23.3:8080/ubuntu/23.10/autoinstall/
 
 #
 # The $vmlinuz_url and $initrd_url, the files can be found on the iso contents
-set vmlinuz_url tftp://192.168.23.3:8080/ubuntu/23.10/netboot/amd64/linux
-set initrd_url tftp://192.168.23.3:8080/ubuntu/23.10/netboot/amd64/initrd
+set vmlinuz_url tftp://192.168.23.3/ubuntu/23.10/netboot/amd64/linux
+set initrd_url tftp://192.168.23.3/ubuntu/23.10/netboot/amd64/initrd
 
 #
 # The $iso_url points to the live-server iso file
