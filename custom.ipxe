@@ -1,12 +1,22 @@
 #!ipxe
-###
-### netboot.xyz-custom menu
-###
 
-:start
-echo Hello world!
-sleep 10
-goto custom_exit
+#
+# Ubuntu Installer
+#
 
-:custom_exit
-exit 0
+#
+# The $seed_url is used by cloud-init's nocloud-net provider to find the user-data and meta-data files. The trailing slash is important, the cloud-init process sticks 'meta-data' or 'user-data' right after, without prepending a forward slash to the file name.
+set seed_url http://192.168.23.3:8080/ubuntu/23.10/autoinstall/
+
+#
+# The $vmlinuz_url and $initrd_url, the files can be found on the iso contents
+set vmlinuz_url http://192.168.23.3:8080/ubuntu/23.10/vmlinuz
+set initrd_url http://192.168.23.3:8080/ubuntu/23.10/initrd
+
+#
+# The $iso_url points to the live-server iso file
+set iso_url http://192.168.23.3:8080/ubuntu/ubuntu-23.10-live-server-amd64.iso
+
+kernel ${vmlinuz_url} autoinstall url=${iso_url} net.ifnames=0 biosdevname=0 ip=::::ubuntu::dhcp ds=nocloud-net;s=${seed_url}
+initrd ${initrd_url}
+boot
