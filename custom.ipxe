@@ -10,8 +10,8 @@ set seed_url http://192.168.23.3:8080/ubuntu/23.10/autoinstall/
 
 #
 # The $vmlinuz_url and $initrd_url, the files can be found on the iso contents
-set vmlinuz_url http://192.168.23.3/ubuntu/23.10/iso/casper/vmlinuz
-set initrd_url http://192.168.23.3/ubuntu/23.10/iso/casper/initrd
+set vmlinuz_url http://192.168.23.3:8080/ubuntu/23.10/iso/casper/vmlinuz
+set initrd_url http://192.168.23.3:8080/ubuntu/23.10/iso/casper/initrd
 
 #
 # The $iso_url points to the live-server iso file
