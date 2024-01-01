@@ -1,23 +1,23 @@
 #!ipxe
 
-#
-# Ubuntu Installer
-#
+set server_ip  192.168.23.3
 
-#
-# The $seed_url is used by cloud-init's nocloud-net provider to find the user-data and meta-data files. The trailing slash is important, the cloud-init process sticks 'meta-data' or 'user-data' right after, without prepending a forward slash to the file name.
-set seed_url http://192.168.23.3:8080/ubuntu/23.10/autoinstall/
+set root_path  /
 
-#
-# The $vmlinuz_url and $initrd_url, the files can be found on the iso contents
-set vmlinuz_url http://192.168.23.3:8080/ubuntu/iso/casper/vmlinuz
-set initrd_url http://192.168.23.3:8080/ubuntu/iso/casper/initrd
+menu Select an OS to boot
 
-#
-# The $iso_url points to the live-server iso file
-set iso_url http://192.168.23.3:8080/ubuntu/ubuntu-23.10-live-server-amd64.iso
+item ubuntu-22.04-desktop-amd64         Install Ubuntu Desktop 22.04 LTS
 
-kernel ${vmlinuz_url} root=/dev/ram0 ramdisk_size=15000000 netboot=http initrd=initrd boot=casper ip=dhcp vga=normal autoinstall ds=nocloud-net;s=${seed_url} iso-url=${iso_url}
-initrd ${initrd_url}
+choose --default exit --timeout 10000 option && goto ${option}
+
+:ubuntu-22.04-desktop-amd64
+
+set os_root ubuntu/ubuntu-23.10-server-amd64
+
+kernel tftp://${server_ip}/${os_root}/casper/vmlinuz
+
+initrd tftp://${server_ip}/${os_root}/casper/initrd
+
+imgargs vmlinuz initrd=initrd boot=casper maybe-ubiquity netboot=http ip=dhcp httproot=${server_ip}:${root_path}/${os_root} quiet splash ---
 
 boot
