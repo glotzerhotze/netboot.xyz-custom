@@ -17,6 +17,6 @@ set initrd_url http://192.168.23.3:8080/ubuntu/23.10/initrd
 # The $iso_url points to the live-server iso file
 set iso_url http://192.168.23.3:8080/ubuntu/ubuntu-23.10-live-server-amd64.iso
 
-kernel ${vmlinuz_url} root=/dev/ram0 ramdisk_size=1500000 autoinstall url=${iso_url} net.ifnames=0 biosdevname=0 ip=::::ubuntu::dhcp ds=nocloud-net;s=${seed_url}
+kernel ${vmlinuz_url} initrd=initrd root=/dev/ram0 ramdisk_size=1500000 autoinstall url=${iso_url} net.ifnames=0 biosdevname=0 ip=::::ubuntu::dhcp ds=nocloud-net;s=${seed_url}
 initrd ${initrd_url}
 boot
